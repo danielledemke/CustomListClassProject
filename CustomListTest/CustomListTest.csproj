@@ -49,16 +49,16 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="Add_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PraseodymiumTDD\PraseodymiumTDD.csproj">
+    <ProjectReference Include="..\PraseodymiumTDD\CustomListProj.csproj">
       <Project>{d20f0e06-c5c1-40f2-8566-4cd86f9d0c96}</Project>
-      <Name>PraseodymiumTDD</Name>
+      <Name>CustomListProj</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
