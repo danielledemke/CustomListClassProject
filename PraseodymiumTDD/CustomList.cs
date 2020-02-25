@@ -12,23 +12,23 @@ namespace PraseodymiumTDD
         private int count;
         private int capacity = 4;
         
-        public T this[int number]
+        public T this[int index]
         {
             get
             {
-                if(number < 0 || number >= array.Length)
+                if(index < 0 || index >= array.Length)
                 {
-                    Console.WriteLine("Index out of range");
+                    throw new IndexOutOfRangeException("Index out of range");
                 }
-                return T[number];
+                return array[index];
             }
             set
             {
-                if (number < 0 || number >= array.Length)
+                if (index < 0 || index >= array.Length)
                 {
-                    Console.WriteLine("Index out of range");
+                    throw new IndexOutOfRangeException("Index out of range");
                 }
-                T[number] = value;
+                array[index] = value;
             }
         }
 
@@ -53,10 +53,10 @@ namespace PraseodymiumTDD
 
         public void Add(T item)
         {
-            IncrementCount(); //increment list by one
-
+            IncreaseCapacity();
             InsertAtAvailableIndex(item); //item needs to land at next available index
-
+            IncrementCount(); //increment list by one
+                         
             //check to make sure it persists
 
             //count == maxcapacity, we need to increase capacity and copy
@@ -74,19 +74,19 @@ namespace PraseodymiumTDD
 
         public void IncreaseCapacity()
         {
-            if(count > capacity)
+            if (count >= capacity)
             {
                 capacity *= 2;
-                T[] newArray = new T[capacity]();
-                newArray = array;
+                T[] newArray = new T[capacity];
+
+                for(int i = 0; i < array.Length; i++)
+                {
+                    newArray[i] = array[i];
+                }
+                
+                array = newArray;
 
             }
-            
-            
-
-
-
-
         }
     }
 }
