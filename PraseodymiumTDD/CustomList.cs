@@ -11,6 +11,8 @@ namespace CustomListProj
         private T[] array;
         private int count;
         private int capacity = 4;
+        private bool removed;
+        
         
         public T this[int index]
         {
@@ -44,6 +46,13 @@ namespace CustomListProj
             get
             {
                 return capacity;
+            }
+        }
+        public bool Removed
+        {
+            get
+            {
+                return removed;
             }
         }
         public CustomList()
@@ -89,9 +98,49 @@ namespace CustomListProj
 
         public void Remove(T item)
         {
-            //decrease count
-            //need to find item and remove item from array
-            //need to shift other items down the index
+            SearchArray(item); //need to find item and remove item from array
+             //decrease count
+             //need to shift other items down the index
         }
+
+        public void DecreaseCount()
+        {
+            if(removed == true)
+            {
+                count--;
+            }
+        }
+
+        public void SearchArray(T item)
+        {
+            int j = 0;
+            T[] newArray = new T[capacity];
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i].Equals(item) && removed == false)
+                {
+                    removed = true;
+                    DecreaseCount();
+                }
+                else
+                {
+                    newArray[j] = array[i];
+                    j++;
+                } 
+                
+            }
+            array = newArray;
+        }
+
+  //      public void ShiftItemsDown()
+   //     {
+   //         for(int i = 1; i < array.Length; i++)
+   //         {
+   //             if(array[i-1] == default)
+   //             {
+  //                  array[i - 1] = array[i];
+    //            }
+    //        }
+    //    }
     }
 }

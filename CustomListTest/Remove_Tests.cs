@@ -33,7 +33,7 @@ namespace CustomListTest
             int expected = 0;
             int actual;
             //act
-            actual = list[0];
+            actual = list.Count;
             //assert
             Assert.AreEqual(expected, actual);
         }
@@ -69,22 +69,33 @@ namespace CustomListTest
             Assert.AreEqual(expected, actual);
         }
         [TestMethod]
-        public void Remove_RemoveItems_CapacityDecreases()
+        public void Remove_RemoveItem_FirstInstanceRemoved()
         {
             //arrange
             CustomList<int> list = new CustomList<int>();
-            list.Add(1);
-            list.Add(2);
             list.Add(3);
-            list.Add(4);
-            list.Add(5);
-            list.Add(6);
-            list.Remove(5);
-            list.Remove(6);
-            int expected = 4;
+            list.Add(3);
+            list.Add(3);
+            list.Remove(3);
+        
+            int expected = 2;
             int actual;
             //act
             actual = list.Count;
+            //assert
+            Assert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void Remove_ItemNotInList_BoolFalse()
+        {
+            //arrange
+            CustomList<int> list = new CustomList<int>();
+            list.Add(5);
+            list.Remove(8);
+            bool expected = false;
+            bool actual;
+            //act
+            actual = list.Removed;
             //assert
             Assert.AreEqual(expected, actual);
         }
