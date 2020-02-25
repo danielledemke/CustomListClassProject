@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PraseodymiumTDD
+namespace CustomListProj
 {
     public class CustomList<T>
     {
@@ -53,13 +53,10 @@ namespace PraseodymiumTDD
 
         public void Add(T item)
         {
-            IncreaseCapacity();
+            IncreaseCapacity(); //count == maxcapacity, we need to increase capacity and copy
             InsertAtAvailableIndex(item); //item needs to land at next available index
-            IncrementCount(); //increment list by one
-                         
-            //check to make sure it persists
-
-            //count == maxcapacity, we need to increase capacity and copy
+            IncrementCount(); //increment list by one    
+            
         }
         public void IncrementCount()
         {
@@ -87,6 +84,14 @@ namespace PraseodymiumTDD
                 array = newArray;
 
             }
+        }
+
+
+        public void Remove(T item)
+        {
+            //decrease count
+            //need to find item and remove item from array
+            //need to shift other items down the index
         }
     }
 }
