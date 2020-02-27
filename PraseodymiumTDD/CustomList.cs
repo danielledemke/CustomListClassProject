@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,19 +7,18 @@ using System.Threading.Tasks;
 
 namespace CustomListProj
 {
-    public class CustomList<T>
+    public class CustomList<T> : IEnumerable
     {
         private T[] array;
         private int count;
         private int capacity = 4;
         private bool removed;
         
-        
         public T this[int index]
         {
             get
             {
-                if(index < 0 || index >= array.Length)
+                if(index < 0 || index >= count)
                 {
                     throw new IndexOutOfRangeException("Index out of range");
                 }
@@ -26,7 +26,7 @@ namespace CustomListProj
             }
             set
             {
-                if (index < 0 || index >= array.Length)
+                if (index < 0 || index >= count)
                 {
                     throw new IndexOutOfRangeException("Index out of range");
                 }
@@ -65,7 +65,6 @@ namespace CustomListProj
             IncreaseCapacity(); //count == maxcapacity, we need to increase capacity and copy
             InsertAtAvailableIndex(item); //item needs to land at next available index
             IncrementCount(); //increment list by one    
-            
         }
         public void IncrementCount()
         {
@@ -85,24 +84,20 @@ namespace CustomListProj
                 capacity *= 2;
                 T[] newArray = new T[capacity];
 
-                for(int i = 0; i < array.Length; i++)
+                for(int i = 0; i < count; i++)
                 {
                     newArray[i] = array[i];
                 }
-                
                 array = newArray;
-
             }
         }
 
-
         public void Remove(T item)
         {
-            SearchArray(item); //need to find item and remove item from array
-             //decrease count
-             //need to shift other items down the index
+           FindItemToRemove(item); //need to find item and remove item from array
+            DecreaseCount(); //decrease count
+                             //need to shift other items down the index
         }
-
         public void DecreaseCount()
         {
             if(removed == true)
@@ -110,27 +105,61 @@ namespace CustomListProj
                 count--;
             }
         }
-
-        public void SearchArray(T item)
+        public void FindItemToRemove(T item)
         {
             int j = 0;
             T[] newArray = new T[capacity];
-            for (int i = 0; i < array.Length; i++)
+            for (int i = 0; i < count; i++)
             {
                 if (array[i].Equals(item) && removed == false)
                 {
                     removed = true;
-                    DecreaseCount();
                 }
                 else
                 {
                     newArray[j] = array[i];
                     j++;
                 } 
-                
             }
             array = newArray;
         }
+        public override string ToString()
+        {
+            string value = "";
+            
+                for(int i = 0; i < count; i++)
+                {
+                value += array[i].ToString() + " ";
+                }
+            return value;
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            for(int i = 0; i < count; i++)
+            {
+                yield return array[i];
+            }
+        }
+
+        public static CustomList<T> operator +(CustomList<T> item1, CustomList<T> item2)
+        {
+             CustomList<T> combined = new CustomList<T>();
+           
+            for (int i = 0; i < item1.count; i++)
+            {
+                combined.Add(item1[i]);
+            }
+            for (int i = 0; i < item2.count; i++)
+            {
+                combined.Add(item2[i]);
+            }
+            return combined;
+        }
+
+
+
+
 
   //      public void ShiftItemsDown()
    //     {
