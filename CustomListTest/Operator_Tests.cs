@@ -20,8 +20,44 @@ namespace CustomListTest
             CustomList<string> expected = new CustomList<string>();
             expected.Add("1");
             expected.Add("penguin");
+            string capture = expected.ToString();
             //act
             actual = numbers + animals;
+            actual.ToString();
+            //assert
+            Assert.AreEqual(expected.ToString(), actual.ToString());
+        }
+        [TestMethod]
+        public void AddOperator_AddTwoCustomLists_CountIncreases()
+        {
+            //arrange
+            CustomList<int> numbers1 = new CustomList<int>();
+            numbers1.Add(20);
+            CustomList<int> numbers2 = new CustomList<int>();
+            numbers2.Add(100);
+            CustomList<int> finalNumbers = numbers1 + numbers2;
+            int expected = 2;
+            int actual;
+            //act
+            actual = finalNumbers.Count;
+            //assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void SubtractOperator_SubtractList_CountDecreases()
+        {
+            //arrange
+            CustomList<int> numbers1 = new CustomList<int>();
+            numbers1.Add(20);
+            numbers1.Add(25);
+            CustomList<int> numbers2 = new CustomList<int>();
+            numbers2.Add(20);
+            CustomList<int> finalNumbers = numbers1 - numbers2;
+            int expected = 1;
+            int actual;
+            //act
+            actual = finalNumbers.Count;
             //assert
             Assert.AreEqual(expected, actual);
         }

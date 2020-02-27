@@ -156,20 +156,18 @@ namespace CustomListProj
             }
             return combined;
         }
+        public static CustomList<T> operator -(CustomList<T> item1, CustomList<T> item2)
+        {
+            for(int i = 0; i < item1.count; i++)
+            {
+                item1.Remove(item2[i]);
+            }
+            return item1;
+        }
 
 
 
 
 
-  //      public void ShiftItemsDown()
-   //     {
-   //         for(int i = 1; i < array.Length; i++)
-   //         {
-   //             if(array[i-1] == default)
-   //             {
-  //                  array[i - 1] = array[i];
-    //            }
-    //        }
-    //    }
     }
 }
