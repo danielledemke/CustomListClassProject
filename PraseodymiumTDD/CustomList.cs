@@ -158,11 +158,32 @@ namespace CustomListProj
         }
         public static CustomList<T> operator -(CustomList<T> item1, CustomList<T> item2)
         {
+            CustomList<T> answer = new CustomList<T>();
+            
             for(int i = 0; i < item1.count; i++)
             {
-                item1.Remove(item2[i]);
+                answer.Add(item1[i]);
             }
-            return item1;
+            for(int i = 0; i < answer.count; i++)
+            {
+                answer.Remove(item2[i]);
+            }
+
+            return answer;
+        }
+
+        public CustomList<T> Zip(CustomList<T> item1, CustomList<T> item2)
+        {
+            CustomList<T> answer = new CustomList<T>();
+            int totalCount = item1.count + item2.count;
+
+            for(int i = 0; i < count; i++)
+            {
+                answer.Add(item1[i]);
+                answer.Add(item2[i]);
+            }
+            return answer;
+
         }
 
 

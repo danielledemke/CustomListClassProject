@@ -10,18 +10,17 @@ namespace CustomListProj
     {
         static void Main(string[] args)
         {
-            CustomList<string> numberStrings = new CustomList<string>();
-            numberStrings.Add("7");
-            numberStrings.Add("27");
-            CustomList<string> strings = new CustomList<string>();
-            strings.Add("Hello");
-            strings.Add("What is up man?!");
+            CustomList<int> numbers = new CustomList<int>();
+            numbers.Add(5);
+            numbers.Add(15);
+            CustomList<int> numbers2 = new CustomList<int>();
+            numbers2.Add(10);
+            numbers2.Add(20);
 
-            CustomList<string> answer = new CustomList<string>();
-            answer = numberStrings + strings;
-
+            CustomList<int> answer = new CustomList<int>();
+            answer.Zip(numbers, numbers2);
             Console.WriteLine(answer);
-            Console.WriteLine();
+
             Console.ReadLine();
 
 
